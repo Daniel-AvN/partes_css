@@ -1,0 +1,134 @@
+/* 
+font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Signika Negative', sans-serif;
+ */
+
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    box-sizing: border-box;  
+}
+
+.container{
+    margin: auto;
+    width: 90%;
+    max-width: 1200px;
+    overflow: hidden;
+}
+
+.hero{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(69, 23, 251, 0.2)), url('https://th.bing.com/th/id/R.0452c63bb153db0f6d55238ae90e8f0e?rik=ggp5xQD03OKpSw&pid=ImgRaw&r=0');
+    background-size: cover;
+    color: #fff;
+    min-height: 500px;
+}
+
+.nav{
+    --state-close: scale(0); /*no se mostrara la close*/
+    --state-hamburguer: scale(1);
+    --state-menu: translate(-100%); /*pa q se valla a la izquierda*/
+    padding: 40px 0;
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: repeat(2, max-content);
+}
+
+.nav:target{
+    /* cuando este siendo apuntada */   
+    --state-close: scale(1);
+    --state-hamburguer: scale(0); /*cuando doy clic a hamburger referencia al nav, cuando referencio a otro elemento que no sea el id nav deja de tener la pseudoclase targer*/
+    --state-menu: scale(1);
+}
+
+.nav__logo{
+    font-size: 2.5em;
+    z-index: 1;
+}
+
+.nav__hamburguer, 
+.nav__close{
+    cursor: pointer;
+    grid-column: -2/-1; /*penultima hasta la ultima*/
+    grid-row: 1/2; /*estaran en la misma posicion*/
+    transition: transform .4s;
+}
+
+.nav__hamburguer{
+    transform: var(--state-hamburguer);
+}
+
+.nav__close{ /*desaparece*/
+    transform: var(--state-close);
+}
+
+
+.nav__icon{
+    width: 40px;
+}
+
+.nav__links{
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    bottom: 0; 
+    left: 0;
+    right: 0;
+    /*pa q ocupe todo el alto y ancho, se muestra el menu amburger porq este tiene un transform, y cuando le damos transform dif a nonea los elemt le damos un z-index
+    
+    los hijos directos de un grid container pueden usar z-index*/
+
+    padding: 0;
+    display: grid;
+    align-content: center;
+    gap: 2em;
+    padding-left: 5%;
+
+    transform: var(--state-menu);
+
+    transition: .3s transform;
+}
+.nav__item{
+    list-style: none;
+}
+
+.nav__link{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+}
+
+@media (min-width: 768px) {
+    /* cuando el viewport tenga un ancho min de 768px */
+    .nav{
+        --state-close: scale(0); /*no se mostrara la close*/
+        --state-hamburguer: scale(0);
+        --state-menu: translate(0); /*se muestre*/
+       }
+    
+    .nav:target{
+        /* cuando este siendo apuntada */   
+        --state-close: scale(0);
+    }
+    .nav__links{
+        background-color: unset;
+        position: unset; /*sea parte de la grid*/
+        padding: 0;
+        display: grid;
+        align-content: center;
+        gap: 1.5em;
+        grid-auto-flow: column; /*flujo en columnas para que se ponga uno alado de 0tro*/
+
+        transform: unset; /*val original*/
+
+        grid-column: -2/-1;
+        grid-row: 1/2;
+    }
+
+    .nav__link{
+        font-size: 1rem;
+        letter-spacing: normal;
+    }
+}

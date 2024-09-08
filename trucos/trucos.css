@@ -1,0 +1,72 @@
+/* .clip-path{
+    margin: 8px;
+    height: 200px;
+    background-image: linear-gradient(crimson, royalblue);
+    overflow: hidden;
+    clip-path: url('#clip');
+} */
+
+body {
+    height: 100vh;
+    display: flex;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: orange;
+}
+
+.form{
+    margin: auto;
+    background-color: #fff;
+    width: 90%;
+    max-width: 400px;
+    padding: 4.5em 3em;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.074);
+}
+
+.form__group{
+    border: 1px solid rgba(255, 0, 0, 0.064);
+    position: relative;
+    --color: #5757577e;
+}
+
+.form__input {
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    color: rgb(51, 51, 51);
+    padding: 0.6em .3em; 
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--color);  
+}
+
+.form__label{
+    color: var(--color);
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 5px;
+    transform: translateY(10px);
+    transition: transform .5s, color 3s;
+}
+
+/* .form__input:not(:placeholder-shown) + .form__label,  */
+.form__input:focus +.form__label{
+    /* indica caundo no estamos mostrando el place holder, not() niega el placeholder */
+    transform: translateY(-12px) scale(.7);
+    transform-origin: left; /*pa q se vaya a la izq*/
+}
+
+/* mantener una especificidad constante */
+
+.title{
+    color: royalblue;
+}
+
+:where(#main) .title{ /*#main .title*/
+    color: tomato;
+}
+
+.title{
+    color: #000;
+}
